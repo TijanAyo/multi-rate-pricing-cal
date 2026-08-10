@@ -4,9 +4,11 @@ dist/
 coverage/
 *.tsbuildinfo
 
+# Ignore every env file by default, then allow the committed template back in.
+# The broad pattern matters: a narrow ".env" rule would leave files like
+# .env.production — which hold real credentials — committable.
 .env
-.env.local
-.env.*.local
+.env.*
 !.env.example
 
 .DS_Store
