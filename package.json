@@ -1,0 +1,25 @@
+{
+  "name": "multi-rate-pricing-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm --filter @pricing/calc build && pnpm --filter api build && pnpm --filter web build",
+    "dev": "pnpm --filter @pricing/calc build && pnpm --parallel --filter api --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "dev:web": "pnpm --filter web dev",
+    "test": "pnpm --filter @pricing/calc test",
+    "test:all": "pnpm --filter @pricing/calc test && pnpm --filter api test:e2e",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "migration:run": "pnpm --filter api migration:run",
+    "migration:revert": "pnpm --filter api migration:revert",
+    "seed": "pnpm --filter api seed"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

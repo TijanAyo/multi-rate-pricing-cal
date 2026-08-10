@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: pricing_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pricing
+      POSTGRES_PASSWORD: pricing
+      POSTGRES_DB: pricing
+    ports:
+      - '5433:5432'
+    volumes:
+      - pricing_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U pricing -d pricing']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Optional database browser. Behind a profile so the default `docker compose
+  # up -d` only needs Postgres:  docker compose --profile tools up -d
+  adminer:
+    image: adminer:latest
+    container_name: pricing_adminer
+    profiles: ['tools']
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pricing_pgdata:
