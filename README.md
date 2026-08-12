@@ -15,7 +15,6 @@
 - [Finalize and immutability rules](#finalize-and-immutability-rules)
 - [API reference](#api-reference)
 - [Tests](#tests)
-- [Deployment](#deployment)
 - [Assumptions and trade-offs](#assumptions-and-trade-offs)
 - [What I would improve before production](#what-i-would-improve-before-production)
 
@@ -35,8 +34,6 @@
                            Displays server-computed figures; never does money
                            arithmetic itself.
 ```
-
-The UI is ported from a [Claude Design](https://claude.ai/design/p/4544dd33-2e6b-4cfe-be39-0fa772d3b5d9) project built on the **Modernist** design system. Its token sheet is vendored verbatim at `apps/web/src/styles/modernist.css`. The prototype's *markup* was kept; its client-side floating-point arithmetic was deliberately discarded — see [Assumptions](#assumptions-and-trade-offs).
 
 **Stack choices:** NestJS + TypeORM for the backend, Next.js for the frontend, PostgreSQL in Docker for local development, decimal.js for money.
 
